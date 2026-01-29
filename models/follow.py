@@ -1,4 +1,4 @@
-from base import Base
+from models.base import Base
 
 from sqlalchemy import ForeignKey, DateTime, func, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column, relationship

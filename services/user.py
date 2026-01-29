@@ -3,6 +3,7 @@ from typing import Optional
 
 from sqlalchemy.orm import Session
 
+from core.errors import ConflictError
 from models.user import User
 from repositories.user import UserRepository
 
@@ -12,10 +13,6 @@ class CreateUserDTO:
     email: str
     name: str
     age: Optional[int] = None
-
-
-class UserAlreadyExists(Exception):
-    pass
 
 
 class UserService:
@@ -33,7 +30,10 @@ class UserService:
         """
         existing = self._user_repo.get_by_email(db, data.email)
         if existing is not None:
-            raise UserAlreadyExists(f"User with email '{data.email}' already exists.")
+            raise ConflictError(
+                "User with this email already exists.",
+                details={"email": data.email},
+            )
 
         user = User(
             email=data.email,
@@ -42,5 +42,7 @@ class UserService:
         )
 
         user = self._user_repo.create(db, user)
+        db.commit()
+        db.refresh(user)
         return user
 
