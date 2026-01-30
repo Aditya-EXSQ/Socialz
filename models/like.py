@@ -1,7 +1,9 @@
-from models.base import Base
+from datetime import datetime
 
 from sqlalchemy import ForeignKey, DateTime, func, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column, relationship
+
+from models.base import Base
 
 class Like(Base):
     __tablename__ = "likes"
@@ -15,7 +17,7 @@ class Like(Base):
         primary_key=True,
     )
 
-    created_at: Mapped[DateTime] = mapped_column(
+    created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
         server_default=func.now(),
         nullable=False

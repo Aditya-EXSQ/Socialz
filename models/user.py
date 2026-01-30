@@ -1,7 +1,9 @@
-from models.base import Base
+from datetime import datetime
 
 from sqlalchemy import String, Integer, DateTime, func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
+
+from models.base import Base
 
 class User(Base):
     __tablename__ = "users"
@@ -11,7 +13,7 @@ class User(Base):
     name: Mapped[str] = mapped_column(String(80), nullable=False)
     age: Mapped[int | None] = mapped_column(Integer, nullable=True)
 
-    created_at: Mapped[DateTime] = mapped_column(
+    created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), 
         server_default=func.now(), 
         nullable=False
