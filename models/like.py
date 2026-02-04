@@ -24,6 +24,7 @@ class Like(Base):
     )
 
     user = relationship("User")
+    
     post = relationship("Post", back_populates="likes")
 
     __table_args__ = (

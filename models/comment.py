@@ -28,4 +28,5 @@ class Comment(Base):
     )
 
     post = relationship("Post", back_populates="comments")
+    
     author = relationship("User")

@@ -9,6 +9,10 @@ class CreateUserIn(BaseModel):
     age: Optional[int] = Field(default=None, ge=0)
 
 
+class DeleteUserIn(BaseModel):
+    id: int
+
+
 class UserOut(BaseModel):
     id: int
     email: EmailStr

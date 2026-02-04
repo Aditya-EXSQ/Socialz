@@ -20,11 +20,13 @@ class User(Base):
     )
 
     posts = relationship("Post", back_populates="author")
+    
     followers = relationship(
         "Follow", 
         foreign_keys='Follow.followee_id', 
         back_populates="followee"
     )
+
     following = relationship(
         "Follow", 
         foreign_keys='Follow.follower_id', 
